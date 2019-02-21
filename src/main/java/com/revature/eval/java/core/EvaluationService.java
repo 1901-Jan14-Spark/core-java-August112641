@@ -33,9 +33,15 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-			
-		String phrase1 = phrase.replaceAll("\\B.|\\P{L}", "").toUpperCase();
-		return phrase1;
+
+//		String phrase1 = phrase.replaceAll("\\B\\W{0}\\S", "").toUpperCase();
+		String[] phrase1 = phrase.split("[^\\w']+");
+		String str = "";
+		for(String i: phrase1) {
+			str += String.valueOf(i.charAt(0)).toUpperCase();
+		}
+		System.out.println(str);
+		return str;
 	}
 
 	/**
@@ -134,7 +140,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
+		//HashMap letters = new HashMap();
 		return 0;
 	}
 
@@ -170,8 +176,11 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		if(string.matches("[2-9][\\S\\d]")){
+			return string;
+		}else {
+			return null;
+		}
 	}
 
 	/**
