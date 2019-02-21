@@ -14,8 +14,14 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String reverse(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String flip= "";
+		int x= string.length();
+		for(int i = x-1; i >=0; i--) {
+			flip=flip+(string.charAt(i));
+		}
+		
+		return flip;
+		
 	}
 
 	/**
@@ -27,8 +33,9 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+			
+		String phrase1 = phrase.replaceAll("\\B.|\\P{L}", "").toUpperCase();
+		return phrase1;
 	}
 
 	/**
@@ -81,18 +88,32 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if(sideOne == sideTwo && sideTwo == sideThree) {
+				return true;
+			}else {
+				return false;
+			}
+					
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if(sideOne == sideTwo && sideTwo != sideThree && sideThree != sideOne
+					|| sideOne == sideThree && sideThree != sideTwo && sideTwo != sideOne
+					|| sideTwo == sideThree && sideThree != sideOne && sideOne !=sideTwo) {
+				return true;
+
+			}else {
+				return false;
+			}
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if(sideOne != sideTwo && sideTwo != sideThree && sideThree != sideOne) {
+				return true;
+
+			}else {
+				return false;
+			}
 		}
 
 	}
