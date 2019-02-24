@@ -1,8 +1,12 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class EvaluationService {
 
@@ -140,8 +144,35 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		//HashMap letters = new HashMap();
-		return 0;
+		int wordScore=0;
+		String caseFix = string.toUpperCase();
+		char[] arr = caseFix.toCharArray();
+		for(int i = 0; i < arr.length; i++) {
+			if(arr[i]== 'A' || arr[i]== 'E'||arr[i]== 'I'||arr[i]== 'O'||arr[i]== 'U'||arr[i]== 'L'
+					||arr[i]== 'N'||arr[i]== 'R'||arr[i]== 'S'||arr[i]== 'T') {
+				wordScore = wordScore + 1;
+			}
+			if(arr[i]== 'D' ||arr[i]== 'G') {
+				wordScore= wordScore +2;
+			}
+			if(arr[i]== 'B' ||arr[i]== 'C' ||arr[i]== 'M' ||arr[i]== 'P') {
+				wordScore = wordScore +3;
+			}
+			if(arr[i]== 'F' ||arr[i]== 'H' ||arr[i]== 'V' ||arr[i]== 'W' ||arr[i]== 'Y') {
+				wordScore = wordScore +4;
+			}
+			if(arr[i]== 'K') {
+				wordScore = wordScore + 5;
+			}
+			if(arr[i]== 'J' ||arr[i]== 'X') {
+				wordScore = wordScore +8;
+			}
+			if(arr[i]== 'Q' ||arr[i]== 'Z') {
+				wordScore = wordScore+10;
+			}
+		}
+		return wordScore;
+	
 	}
 
 	/**
@@ -176,11 +207,16 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		if(string.matches("[2-9][\\S\\d]")){
-			return string;
-		}else {
-			return null;
+		String numFix= string.replaceAll("[^0-9]*", "");
+
+		if(numFix.length() > 11 || numFix.length() < 10) {
+			throw new IllegalArgumentException();
 		}
+		if(numFix.substring(0)=="1") {
+			numFix = numFix.substring(1);
+			return numFix;
+		}
+		return numFix;
 	}
 
 	/**
@@ -193,10 +229,19 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		HashMap<String, Integer> timesRepeated = new HashMap<String, Integer>();
+		String[] splitInput = string.split("[^\\w']+");
+		for(String words: splitInput) {
+			if(!timesRepeated.containsKey(words)) {
+				timesRepeated.put(words, 1);
+			}
+			else {
+				timesRepeated.put(words, timesRepeated.get(words)+1);
+			}
+		}
+		return timesRepeated;
+		
 	}
-
 	/**
 	 * 7. Implement a binary search algorithm.
 	 * 
@@ -236,8 +281,7 @@ public class EvaluationService {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
-			return 0;
+					return 0;
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -272,11 +316,20 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
-	}
-
+//	public String toPigLatin(String string) {
+//		//char[] chars = string.toLowerCase().toCharArray();
+//		char firstLetter = string.toLowerCase().charAt(0);
+//			if(firstLetter == 'a' ||firstLetter == 'e' ||firstLetter == 'i'
+//					||firstLetter == 'o'||firstLetter == 'u') {
+//				string+= "ay";
+//				
+//				return string;
+//		}
+//			if( ){
+//			string.substring(1).concat(string.substring(0,1)).concat("ay");
+//			return string;
+//		}
+//	}
 	/**
 	 * 9. An Armstrong number is a number that is the sum of its own digits each
 	 * raised to the power of the number of digits.
@@ -293,7 +346,20 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
+		int original = input;
+		int total =0;
+		String numb = Integer.toString(input);
+		
+		char[] chars =numb.toCharArray();
+		int expo = chars.length;
+		for(int i:chars) {
+			int numVal= Character.getNumericValue(i);
+			int multi = (int) Math.pow(numVal, expo);
+			total+= multi;
+			
+		}if(total==original) {
+			return true;
+		}
 		return false;
 	}
 
@@ -308,7 +374,8 @@ public class EvaluationService {
 	 * @return
 	 */
 	public List<Integer> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
+
+		
 		return null;
 	}
 
@@ -460,8 +527,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+			char[] wordList= string.toLowerCase().replaceAll(" ", "").toCharArray();
+			Set<Character> wordSet = new HashSet<>();
+			for(int i=0; i < wordList.length; i++) {
+				wordSet.add(wordList[i]);
+				//System.out.print(wordList[i]);
+			}
+			if(wordSet.size() < 26) {
+				return false;
+			}
+			if (wordSet.toString().matches("[a-z]*"));
+			
+		return true;
 	}
 
 	/**
