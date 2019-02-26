@@ -444,16 +444,15 @@ public class EvaluationService {
 	 * @param l
 	 * @return
 	 */
-	public List<Integer> calculatePrimeFactorsOf(long l) {
-		List<Integer> factors = new ArrayList<Integer>();
-		int holder = (int) l;
-		for(int i = 2; i < holder/i; i++) {
-			factors.add(i);
-			System.out.println(factors);
-			holder = holder/i;
-		if(holder > 1) {
-			factors.add(holder);
-		}
+	public List<Long> calculatePrimeFactorsOf(long l) {
+		List<Long> factors = new ArrayList<>();
+		long holder = l;
+		for(int i = 2; i <= holder/i; i++) {
+			while(holder % i ==0) {
+				factors.add((long) i);
+				System.out.println(factors);
+				holder = holder/i;	
+			}
 	}
 		return factors;
 }
