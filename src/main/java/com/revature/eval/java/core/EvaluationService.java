@@ -447,9 +447,9 @@ public class EvaluationService {
 	public List<Long> calculatePrimeFactorsOf(long l) {
 		List<Long> factors = new ArrayList<>();
 		long holder = l;
-		for(int i = 2; i <= holder/i; i++) {
+		for(long i = 2; i <= holder; i++) {
 			while(holder % i ==0) {
-				factors.add((long) i);
+				factors.add(i);
 				System.out.println(factors);
 				holder = holder/i;
 			}
