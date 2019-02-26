@@ -493,9 +493,9 @@ public class EvaluationService {
 			public String rotate(String string) {
 				String lowC = string.toLowerCase();
 				StringBuilder cypher = new StringBuilder(lowC);
-				int key;
-				for(int i = 26; i < cypher.length(); i++) {
-					cypher[i] = 
+				int key = 26;
+				for(int i = i; i < cypher.length(); i++) {
+					 cypher.
 				}
 				return null;
 			}
