@@ -451,7 +451,7 @@ public class EvaluationService {
 			while(holder % i ==0) {
 				factors.add((long) i);
 				System.out.println(factors);
-				holder = holder/i;	
+				holder = holder/i;
 			}
 	}
 		return factors;
@@ -491,7 +491,12 @@ public class EvaluationService {
 			}
 
 			public String rotate(String string) {
-				// TODO Write an implementation for this method declaration
+				String lowC = string.toLowerCase();
+				StringBuilder cypher = new StringBuilder(lowC);
+				int key;
+				for(int i = 26; i < cypher.length(); i++) {
+					cypher[i] = 
+				}
 				return null;
 			}
 
