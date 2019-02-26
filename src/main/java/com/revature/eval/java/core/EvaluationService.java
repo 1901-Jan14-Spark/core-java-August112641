@@ -1,7 +1,9 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -277,11 +279,26 @@ public class EvaluationService {
 	 * binary search is a dichotomic divide and conquer search algorithm.
 	 * 
 	 */
-	static class BinarySearch<T> {
+	static class BinarySearch<T>implements Comparable<T>{
 		private List<T> sortedList;
-
+		
 		public int indexOf(T t) {
-					return 0;
+		int start = 0;
+		int end = sortedList.size();
+		int mid = (end+start)/2;
+	 
+			ArrayList<T> nums = new ArrayList<>();
+			for(T arr: sortedList) {
+				nums.add(arr);
+				T list = sortedList.get(mid);			
+				if(list == t) {
+						return mid;						
+				}
+			if(sortedList.compareTo(t))
+			
+			return mid;
+			}
+			return mid;
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -296,6 +313,11 @@ public class EvaluationService {
 		public void setSortedList(List<T> sortedList) {
 			this.sortedList = sortedList;
 		}
+
+		@Override
+		public int compareTo(T o) {
+			return 0;
+		}	
 
 	}
 
@@ -316,20 +338,69 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-//	public String toPigLatin(String string) {
-//		//char[] chars = string.toLowerCase().toCharArray();
-//		char firstLetter = string.toLowerCase().charAt(0);
-//			if(firstLetter == 'a' ||firstLetter == 'e' ||firstLetter == 'i'
-//					||firstLetter == 'o'||firstLetter == 'u') {
-//				string+= "ay";
+	public String toPigLatin(String string) {
+		char[] vow = {'a','e','i','o','u'};
+		char pos0 = string.toLowerCase().charAt(0);
+		char pos1 = string.toLowerCase().charAt(1);
+		char pos2 = string.toLowerCase().charAt(2);
+
+//		while(string != null) {
+//			String[] words = string.split(" ");
+//				for(String i: words) {
+//					System.out.println();
 //				
-//				return string;
+//					char pos3 = i.toLowerCase().charAt(0);
+//					char pos4 = i.toLowerCase().charAt(1);
+//					char pos5 = i.toLowerCase().charAt(2);
+//					for(char k :vow) {
+//						if(pos0 ==vow[k]) {
+//							return string+"ay";
+//						}
+//						}
+//						
+//				}
 //		}
-//			if( ){
-//			string.substring(1).concat(string.substring(0,1)).concat("ay");
-//			return string;
-//		}
-//	}
+		for(int i = 0; i < vow.length; i++) {
+			if(pos0 ==vow[i]) {
+				return string+"ay";
+			}
+		}
+	     if(pos0 =='y') {
+	    	 string = string.substring(1)+string.substring(0,1)+"ay";
+	     }
+		 if(pos0 == 's' && pos1 =='h'|| pos0 == 'c' && pos1 =='h'||
+			pos0 == 't' && pos1 =='h'|| pos0 == 'w' && pos1 =='h'||
+			pos0 == 'b' && pos1 =='l'|| pos0 == 'b' && pos1 =='r'||
+			pos0 == 'c' && pos1 =='l'|| pos0 == 'c' && pos1 =='r'||
+			pos0 == 'd' && pos1 =='r'|| pos0 == 'f' && pos1 =='l'||
+			pos0 == 'f' && pos1 =='r'|| pos0 == 'g' && pos1 =='l'||
+			pos0 == 'g' && pos1 =='r'|| pos0 == 'p' && pos1 =='l'||
+			pos0 == 'p' && pos1 =='r'|| pos0 == 's' && pos1 =='c'||
+			pos0 == 's' && pos1 =='k'|| pos0 == 's' && pos1 =='l'||
+			pos0 == 's' && pos1 =='m'|| pos0 == 's' && pos1 =='n'||
+			pos0 == 's' && pos1 =='p'|| pos0 == 's' && pos1 =='t'||
+			pos0 == 's' && pos1 =='w'|| pos0 == 't' && pos1 =='r'||
+			pos0 == 't' && pos1 =='w'|| pos0 == 'w' && pos1 =='r') {
+			
+		String temp = string.substring(2);
+		temp = temp + pos0+pos1+"ay";
+		string = temp;
+		}
+		if(pos0 == 's'&& pos1=='c'&& pos2 =='h' || pos0 == 's'&& pos1=='c'&& pos2 =='r' ||
+		   pos0 == 's'&& pos1=='h'&& pos2 =='r' || pos0 == 's'&& pos1=='p'&& pos2 =='h' ||
+		   pos0 == 's'&& pos1=='l'&& pos2 =='l' || pos0 == 's'&& pos1=='p'&& pos2 =='r' ||
+		   pos0 == 's'&& pos1=='q'&& pos2 =='u' || pos0 == 's'&& pos1=='t'&& pos2 =='r' ||
+		   pos0 == 't'&& pos1=='h'&& pos2 =='r') {
+							//school
+		String temp1 =string.substring(1,4);
+		System.out.println(temp1);
+		temp1 = temp1+pos0+pos1+pos2+"ay";
+		string = temp1;
+		System.out.println(string);
+		}
+		
+		return string;
+	}
 	/**
 	 * 9. An Armstrong number is a number that is the sum of its own digits each
 	 * raised to the power of the number of digits.
@@ -374,11 +445,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public List<Integer> calculatePrimeFactorsOf(long l) {
-
-		
-		return null;
+		List<Integer> factors = new ArrayList<Integer>();
+		int holder = (int) l;
+		for(int i = 2; i < holder/i; i++) {
+			factors.add(i);
+			System.out.println(factors);
+			holder = holder/i;
+		if(holder > 1) {
+			factors.add(holder);
+		}
 	}
-
+		return factors;
+}
 	/**
 	 * 11. Create an implementation of the rotational cipher, also sometimes called
 	 * the Caesar cipher.
@@ -405,20 +483,20 @@ public class EvaluationService {
 	 * gur ynml qbt. ROT13 Gur dhvpx oebja sbk whzcf bire gur ynml qbt. gives The
 	 * quick brown fox jumps over the lazy dog.
 	 */
-	static class RotationalCipher {
-		private int key;
+		static class RotationalCipher {
+			private int key;
 
-		public RotationalCipher(int key) {
-			super();
-			this.key = key;
+			public RotationalCipher(int key) {
+				super();
+				this.key = key;
+			}
+
+			public String rotate(String string) {
+				// TODO Write an implementation for this method declaration
+				return null;
+			}
+
 		}
-
-		public String rotate(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
-		}
-
-	}
 
 	/**
 	 * 12. Given a number n, determine what the nth prime is.
@@ -433,7 +511,6 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		// TODO Write an implementation for this method declaration
 		return 0;
 	}
 
