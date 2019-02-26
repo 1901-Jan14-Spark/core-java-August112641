@@ -608,19 +608,30 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-			char[] wordList= string.toLowerCase().replaceAll(" ", "").toCharArray();
-			Set<Character> wordSet = new HashSet<>();
-			for(int i=0; i < wordList.length; i++) {
-				wordSet.add(wordList[i]);
-				//System.out.print(wordList[i]);
-			}
-			if(wordSet.size() < 26) {
-				return false;
-			}
-			if (wordSet.toString().matches("[a-z]*"));
-			
-		return true;
-	}
+int counter = 0;
+		
+		// if sentence letters total does not = 26...exit program
+        if (string.length() < 26)  
+             return false;  
+        
+        // Run through alphabet checking each letter
+        for (char letter = 'a'; letter <= 'z'; letter++) {
+        	// If sentence contains the character letter, converted to a string, add 1 to counter
+        	// Else exit program
+        	if (string.contains(String.valueOf(letter))) {
+        		counter++;
+        	} else {
+        		return false;
+        	}
+        }
+        
+        // If counter is greater than or equal to 26, it's a pangram. If not...no
+        if (counter >= 26) {
+        	 return true; 
+        }
+        return false;
+        
+   }  
 
 	/**
 	 * 17. Calculate the moment when someone has lived for 10^9 seconds.
